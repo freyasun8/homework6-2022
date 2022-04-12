@@ -10,8 +10,8 @@ window.addEventListener("load", function() {
 
 document.querySelector("#play").addEventListener("click", function() {
  	console.log("Play Video");
-	 video.play();
-	 document.querySelector("#volume").innerHTML = video.volume * 100 + "%";
+	video.play();
+	document.querySelector("#volume").innerHTML = video.volume * 100 + "%";
 
 });
 
@@ -34,39 +34,49 @@ document.querySelector("#faster").addEventListener("click", function() {
 	console.log("Speed is",video.playbackRate)
 
 });
-
 document.querySelector("#skip").addEventListener("click", function() {
-	console.log("Skip ahead");
-	video.currentTime += 15
-	if (video.currentTime >= video.duration)
-	    video.currentTime = 0
-	console.log("video current time",video.currentTime)
+	console.log("Current location is " + video.currentTime)
+	video.currentTime += 15;
+	if (video.currentTime >= video.duration) {
+		video.currentTime = 0;
+		console.log("Going back to beginning");
+	}
+	console.log("New location", video.currentTime);
 });
 
+
+
+
 document.querySelector("#mute").addEventListener("click", function() {
-	if (video.muted == false) {
-		console.log("Mute")
-		video.muted = true
-		document.querySelector("#mute").innerHTML = "Unmute"
-	}else {
-		console.log("Unmute")
+
+	if (video.muted){
+		this.innerHTML = "Mute"
 		video.muted = false
-		document.querySelector("#mute").innerHTML = "Mute"
+		console.log("Muted")
 	}
-})
+
+	else{
+		this.innerHTML = "Unmute"
+		video.muted = true
+		console.log("Unmuted")
+	}
+
+});
+
 document.querySelector("#slider").addEventListener("click", function() {
 	console.log("Change Volume")
+	console.log(this.value)
 	video.volume = this.value / 100
 	document.querySelector("#volume").innerHTML = video.volume * 100 + "%"
 })
 
 document.querySelector("#vintage").addEventListener("click", function() {
-	console.log("Old School")
+	console.log("Adding class");
 	video.classList.add("oldSchool")
 })
 
 document.querySelector("#orig").addEventListener("click", function() {
-	console.log("Original")
+	console.log("Removing class");
 	video.classList.remove("oldSchool")
 })
 
